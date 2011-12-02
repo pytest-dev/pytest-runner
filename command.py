@@ -15,10 +15,12 @@ class PyTest(_pytest_runner_test.test):
 	user_options = [
 		('junitxml=', None, "Output jUnit XML test results to specified "
 			"file"),
+		('extras', None, "Install (all) setuptools extras when running tests"),
 	]
 
 	def initialize_options(self):
 		self.junitxml=None
+		self.extras=False
 
 	def finalize_options(self):
 		pass
@@ -28,6 +30,9 @@ class PyTest(_pytest_runner_test.test):
 			self.distribution.fetch_build_eggs(self.distribution.install_requires)
 		if self.distribution.tests_require:
 			self.distribution.fetch_build_eggs(self.distribution.tests_require)
+		if self.distribution.extras_require and self.extras:
+			map(self.distribution.fetch_build_eggs,
+				self.distribution.extras_require.values())
 		if self.dry_run:
 			self.announce('skipping tests (dry run)')
 			return
