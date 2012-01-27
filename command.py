@@ -19,13 +19,17 @@ class PyTest(_pytest_runner_test.test):
 	]
 
 	def initialize_options(self):
-		self.junitxml=None
-		self.extras=False
+		self.junitxml = None
+		self.extras = False
 
 	def finalize_options(self):
 		pass
 
 	def run(self):
+		"""
+		Override run to ensure requirements are available in this session (but
+		don't install them anywhere).
+		"""
 		if self.distribution.install_requires:
 			self.distribution.fetch_build_eggs(self.distribution.install_requires)
 		if self.distribution.tests_require:
@@ -39,6 +43,9 @@ class PyTest(_pytest_runner_test.test):
 		self.with_project_on_sys_path(self.run_tests)
 
 	def run_tests(self):
+		"""
+		Override run_tests to invoke pytest.
+		"""
 		import pytest
 		import sys
 		# hide command-line arguments from pytest.main
@@ -51,9 +58,14 @@ class PyTest(_pytest_runner_test.test):
 
 	@classmethod
 	def install(cls, setup_params):
+		"""
+		Given a dictionary of keyword parameters to be passed to setup(),
+		update those parameters with tests_require and cmdclass to make
+		pytest available.
+		"""
 		reqs = setup_params.setdefault('tests_require', [])
 		if not any('pytest' in req for req in reqs):
-			reqs.extend(['pytest>=2.1.2',])
+			reqs.extend(['pytest>=2.1.2'])
 		setup_params.setdefault('cmdclass', {}).update(
 			test=cls,
 		)
