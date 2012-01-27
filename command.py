@@ -9,6 +9,8 @@ PyTest.install(setup_params)
 setuptools.setup(**setup_params)
 """
 
+import os
+
 from setuptools.command import test as _pytest_runner_test
 
 class PyTest(_pytest_runner_test.test):
@@ -16,20 +18,28 @@ class PyTest(_pytest_runner_test.test):
 		('junitxml=', None, "Output jUnit XML test results to specified "
 			"file"),
 		('extras', None, "Install (all) setuptools extras when running tests"),
+		('index_url=', None, "Specify an index url from which to retrieve "
+			"dependencies"),
+		('allow_hosts=', None, "Whitelist of comma-separated hosts to allow "
+			"when retrieving dependencies"),
 	]
 
 	def initialize_options(self):
 		self.junitxml = None
 		self.extras = False
+		self.index_url = None
+		self.allow_hosts = None
 
 	def finalize_options(self):
-		pass
+		if self.allow_hosts:
+			self.allow_hosts = self.allow_hosts.split(',')
 
 	def run(self):
 		"""
 		Override run to ensure requirements are available in this session (but
 		don't install them anywhere).
 		"""
+		self._build_egg_fetcher()
 		if self.distribution.install_requires:
 			self.distribution.fetch_build_eggs(self.distribution.install_requires)
 		if self.distribution.tests_require:
@@ -41,6 +51,39 @@ class PyTest(_pytest_runner_test.test):
 			self.announce('skipping tests (dry run)')
 			return
 		self.with_project_on_sys_path(self.run_tests)
+
+	def _build_egg_fetcher(self):
+		"""Build an egg fetcher that respects index_url and allow_hosts"""
+		# modified from setuptools.dist:Distribution.fetch_build_egg
+		from setuptools.command.easy_install import easy_install
+		main_dist = self.distribution
+		# construct a fake distribution to store the args for easy_install
+		dist = main_dist.__class__({'script_args': ['easy_install']})
+		dist.parse_config_files()
+		opts = dist.get_option_dict('easy_install')
+		keep = (
+			'find_links', 'site_dirs', 'index_url', 'optimize',
+			'site_dirs', 'allow_hosts'
+		)
+		for key in opts.keys():
+			if key not in keep:
+				del opts[key]   # don't use any other settings
+		if main_dist.dependency_links:
+			links = main_dist.dependency_links[:]
+			if 'find_links' in opts:
+				links = opts['find_links'][1].split() + links
+			opts['find_links'] = ('setup', links)
+		if self.allow_hosts:
+			opts['allow_hosts'] = self.allow_hosts
+		if self.index_url:
+			opts['index_url'] = self.index_url
+		cmd = easy_install(
+			dist, args=["x"], install_dir=os.curdir, exclude_scripts=True,
+			always_copy=False, build_directory=None, editable=False,
+			upgrade=False, multi_version=True, no_report = True
+		)
+		cmd.ensure_finalized()
+		main_dist._egg_fetcher = cmd
 
 	def run_tests(self):
 		"""
