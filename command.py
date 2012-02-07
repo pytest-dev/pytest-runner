@@ -17,9 +17,9 @@ class PyTest(_pytest_runner_test.test):
 		('junitxml=', None, "Output jUnit XML test results to specified "
 			"file"),
 		('extras', None, "Install (all) setuptools extras when running tests"),
-		('index_url=', None, "Specify an index url from which to retrieve "
+		('index-url=', None, "Specify an index url from which to retrieve "
 			"dependencies"),
-		('allow_hosts=', None, "Whitelist of comma-separated hosts to allow "
+		('allow-hosts=', None, "Whitelist of comma-separated hosts to allow "
 			"when retrieving dependencies"),
 	]
 
