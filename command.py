@@ -4,8 +4,7 @@ Setup scripts can use this to add setup.py test support for pytest runner.
 Recommended usage:
 
 execfile('pytest-runner/command.py')
-setup_params = dict(...)
-PyTest.install(setup_params)
+setup_params = PyTest.install(dict(...))
 setuptools.setup(**setup_params)
 """
 
@@ -112,3 +111,4 @@ class PyTest(_pytest_runner_test.test):
 		setup_params.setdefault('cmdclass', {}).update(
 			test=cls,
 		)
+		return setup_params
