@@ -8,9 +8,9 @@ setup_params = PyTest.install(dict(...))
 setuptools.setup(**setup_params)
 """
 
-import os
+import os as _os
 
-from setuptools.command import test as _pytest_runner_test
+import setuptools.command.test as _pytest_runner_test
 
 class PyTest(_pytest_runner_test.test):
 	user_options = [
@@ -30,8 +30,7 @@ class PyTest(_pytest_runner_test.test):
 		self.allow_hosts = None
 
 	def finalize_options(self):
-		if self.allow_hosts:
-			self.allow_hosts = self.allow_hosts.split(',')
+		pass
 
 	def run(self):
 		"""
@@ -73,11 +72,11 @@ class PyTest(_pytest_runner_test.test):
 				links = opts['find_links'][1].split() + links
 			opts['find_links'] = ('setup', links)
 		if self.allow_hosts:
-			opts['allow_hosts'] = self.allow_hosts
+			opts['allow_hosts'] = ('test', self.allow_hosts)
 		if self.index_url:
-			opts['index_url'] = self.index_url
+			opts['index_url'] = ('test', self.index_url)
 		cmd = easy_install(
-			dist, args=["x"], install_dir=os.curdir, exclude_scripts=True,
+			dist, args=["x"], install_dir=_os.curdir, exclude_scripts=True,
 			always_copy=False, build_directory=None, editable=False,
 			upgrade=False, multi_version=True, no_report = True
 		)
