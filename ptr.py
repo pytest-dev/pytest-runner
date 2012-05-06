@@ -3,9 +3,21 @@ Setup scripts can use this to add setup.py test support for pytest runner.
 
 Recommended usage:
 
-execfile('pytest-runner/command.py')
-setup_params = PyTest.install(dict(...))
-setuptools.setup(**setup_params)
+- add pytest-runner to your 'setup_requires'
+- include 'pytest' and any other testing requirements to 'tests_require'
+- invoke tests with setup.py ptr
+
+Alternate usage:
+
+- include this file (ptr.py) in your repo
+- add these lines to your setup.py::
+
+	execfile('ptr.py')
+	setup_params = PyTest.install(dict(...))
+	setuptools.setup(**setup_params)
+
+	Where '...' are your normal keyword parameters to setup()
+- invoke your tests with setup.py test
 """
 
 import os as _os

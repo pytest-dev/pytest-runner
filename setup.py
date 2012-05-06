@@ -8,11 +8,11 @@ setup_params = dict(
 	author="Jason R. Coombs",
 	author_email="jaraco@jaraco.com",
 	url="https://bitbucket.org/jaraco/pytest-runner",
-	packages=setuptools.find_packages(),
+	py_modules = ['ptr'],
 	zip_safe=True,
 	entry_points = {
 		'distutils.commands':
-			['pytest_runner = pytest_runner.command:PyTest'],
+			['ptr = ptr:PyTest'],
 	},
 	setup_requires=[
 		'hgtools',
