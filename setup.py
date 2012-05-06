@@ -12,7 +12,7 @@ setup_params = dict(
 	zip_safe=True,
 	entry_points = {
 		'distutils.commands':
-			['test = pytest-runner.command:PyTest'],
+			['test = pytest_runner.command:PyTest'],
 	},
 	setup_requires=[
 		'hgtools',
