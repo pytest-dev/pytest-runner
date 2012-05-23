@@ -1,23 +1,5 @@
 """
-Setup scripts can use this to add setup.py test support for pytest runner.
-
-Recommended usage:
-
-- add pytest-runner to your 'setup_requires'
-- include 'pytest' and any other testing requirements to 'tests_require'
-- invoke tests with setup.py ptr
-
-Alternate usage:
-
-- include this file (ptr.py) in your repo
-- add these lines to your setup.py::
-
-	execfile('ptr.py')
-	setup_params = PyTest.install(dict(...))
-	setuptools.setup(**setup_params)
-
-	Where '...' are your normal keyword parameters to setup()
-- invoke your tests with setup.py test
+Implementation
 """
 
 import os as _os
@@ -61,6 +43,7 @@ class PyTest(_pytest_runner_test.test):
 			self.announce('skipping tests (dry run)')
 			return
 		self.with_project_on_sys_path(self.run_tests)
+		return self.result_code
 
 	def _build_egg_fetcher(self):
 		"""Build an egg fetcher that respects index_url and allow_hosts"""
@@ -106,7 +89,7 @@ class PyTest(_pytest_runner_test.test):
 		del sys.argv[1:]
 		if getattr(self, 'junitxml', None):
 			sys.argv.append('--junitxml=%s' % self.junitxml)
-		pytest.main()
+		self.result_code = pytest.main()
 		sys.argv[:] = argv_saved
 
 	@classmethod
