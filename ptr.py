@@ -3,6 +3,8 @@ Implementation
 """
 
 import os as _os
+import shlex as _shlex
+import warnings as _warnings
 
 import setuptools.command.test as _pytest_runner_test
 
@@ -15,6 +17,8 @@ class PyTest(_pytest_runner_test.test):
 			"dependencies"),
 		('allow-hosts=', None, "Whitelist of comma-separated hosts to allow "
 			"when retrieving dependencies"),
+		('addopts=', None, "Additional options to be passed verbatim to the "
+			"pytest runner")
 	]
 
 	def initialize_options(self):
@@ -22,9 +26,17 @@ class PyTest(_pytest_runner_test.test):
 		self.extras = False
 		self.index_url = None
 		self.allow_hosts = None
+		self.addopts = []
 
 	def finalize_options(self):
-		pass
+		if self.addopts:
+			self.addopts = _shlex.split(self.addopts)
+		if self.junitxml:
+			# For compatibility, allow junitxml to be provided to the plugin.
+			# In the future, junitxml should be specified using addopts.
+			_warnings.warn("junitxml is deprecated, use addopts to pass "
+				"options to py.test", DeprecationWarning)
+			self.addopts.extend(['--junitxml', self.junitxml])
 
 	def run(self):
 		"""
@@ -86,9 +98,7 @@ class PyTest(_pytest_runner_test.test):
 		import sys
 		# hide command-line arguments from pytest.main
 		argv_saved = list(sys.argv)
-		del sys.argv[1:]
-		if getattr(self, 'junitxml', None):
-			sys.argv.append('--junitxml=%s' % self.junitxml)
+		sys.argv[1:] = self.addopts
 		self.result_code = pytest.main()
 		sys.argv[:] = argv_saved
 
