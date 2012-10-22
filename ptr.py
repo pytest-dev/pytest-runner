@@ -55,6 +55,8 @@ class PyTest(_pytest_runner_test.test):
 			self.announce('skipping tests (dry run)')
 			return
 		self.with_project_on_sys_path(self.run_tests)
+		if self.result_code:
+			raise SystemExit(self.result_code)
 		return self.result_code
 
 	def _build_egg_fetcher(self):
