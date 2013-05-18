@@ -4,30 +4,28 @@ pytest-runner
 Setup scripts can use pytest-runner to add setup.py test support for pytest
 runner.
 
-Recommended usage
------------------
+Usage
+-----
 
-- Add 'pytest-runner' to your 'setup_requires'. Pin to '>=1.0,<2.0dev' (or
+- Add 'pytest-runner' to your 'setup_requires'. Pin to '>=2.0,<3dev' (or
   similar) to avoid pulling in incompatible versions.
 - Include 'pytest' and any other testing requirements to 'tests_require'.
 - Invoke tests with `setup.py ptr`.
 
-Alternate usage
----------------
-
-- Include the file `ptr.py` in your repo.
-- Add these lines to your setup.py::
-
-	execfile('ptr.py')
-	setup_params = PyTest.install(dict(...))
-	setuptools.setup(**setup_params)
-
-  Where '...' are your normal keyword parameters to setup().
-
-- Invoke your tests with setup.py test.
+See the `jaraco.util <https://bitbucket.org/jaraco/jaraco.util/>`_ project
+for an example.
 
 Changes
 -------
+
+2.0
+~~~
+
+* Removed support for the alternate usage. The recommended usage (as a
+  distutils command) is now the only supported usage.
+* Removed support for the --junitxml parameter to the ptr command. Clients
+  should pass the same parameter (and all other py.test arguments) to py.test
+  via the --addopts parameter.
 
 1.1
 ~~~

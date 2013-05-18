@@ -4,14 +4,11 @@ Implementation
 
 import os as _os
 import shlex as _shlex
-import warnings as _warnings
 
 import setuptools.command.test as _pytest_runner_test
 
 class PyTest(_pytest_runner_test.test):
 	user_options = [
-		('junitxml=', None, "Output jUnit XML test results to specified "
-			"file"),
 		('extras', None, "Install (all) setuptools extras when running tests"),
 		('index-url=', None, "Specify an index url from which to retrieve "
 			"dependencies"),
@@ -22,7 +19,6 @@ class PyTest(_pytest_runner_test.test):
 	]
 
 	def initialize_options(self):
-		self.junitxml = None
 		self.extras = False
 		self.index_url = None
 		self.allow_hosts = None
@@ -31,12 +27,6 @@ class PyTest(_pytest_runner_test.test):
 	def finalize_options(self):
 		if self.addopts:
 			self.addopts = _shlex.split(self.addopts)
-		if self.junitxml:
-			# For compatibility, allow junitxml to be provided to the plugin.
-			# In the future, junitxml should be specified using addopts.
-			_warnings.warn("junitxml is deprecated, use addopts to pass "
-				"options to py.test", DeprecationWarning)
-			self.addopts.extend(['--junitxml', self.junitxml])
 
 	def run(self):
 		"""
@@ -103,18 +93,3 @@ class PyTest(_pytest_runner_test.test):
 		sys.argv[1:] = self.addopts
 		self.result_code = pytest.main()
 		sys.argv[:] = argv_saved
-
-	@classmethod
-	def install(cls, setup_params):
-		"""
-		Given a dictionary of keyword parameters to be passed to setup(),
-		update those parameters with tests_require and cmdclass to make
-		pytest available.
-		"""
-		reqs = setup_params.setdefault('tests_require', [])
-		if not any('pytest' in req for req in reqs):
-			reqs.extend(['pytest>=2.1.2'])
-		setup_params.setdefault('cmdclass', {}).update(
-			test=cls,
-		)
-		return setup_params
