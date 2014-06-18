@@ -5,9 +5,9 @@ Implementation
 import os as _os
 import shlex as _shlex
 
-import setuptools.command.test as _pytest_runner_test
+import setuptools.command.test as orig
 
-class PyTest(_pytest_runner_test.test):
+class PyTest(orig.test):
 	user_options = [
 		('extras', None, "Install (all) setuptools extras when running tests"),
 		('index-url=', None, "Specify an index url from which to retrieve "
