@@ -10,13 +10,18 @@ Usage
 - Add 'pytest-runner' to your 'setup_requires'. Pin to '>=2.0,<3dev' (or
   similar) to avoid pulling in incompatible versions.
 - Include 'pytest' and any other testing requirements to 'tests_require'.
-- Invoke tests with `setup.py ptr`.
+- Invoke tests with `setup.py pytest`.
 
 See the `jaraco.util <https://bitbucket.org/jaraco/jaraco.util/>`_ project
 for an example.
 
 Changes
 -------
+
+2.1
+~~~
+
+* The preferred invocation is now the 'pytest' command.
 
 2.0
 ~~~

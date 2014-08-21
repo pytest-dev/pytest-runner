@@ -13,6 +13,7 @@ setup_params = dict(
 	entry_points = {
 		'distutils.commands': [
 			'ptr = ptr:PyTest',
+			'pytest = ptr:PyTest',
 		],
 	},
 	license = 'MIT',
