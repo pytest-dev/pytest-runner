@@ -11,8 +11,9 @@ setup_params = dict(
 	py_modules = ['ptr'],
 	zip_safe=True,
 	entry_points = {
-		'distutils.commands':
-			['ptr = ptr:PyTest'],
+		'distutils.commands': [
+			'ptr = ptr:PyTest',
+		],
 	},
 	license = 'MIT',
 	classifiers = [
