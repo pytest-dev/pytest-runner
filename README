@@ -11,6 +11,10 @@ Usage
   similar) to avoid pulling in incompatible versions.
 - Include 'pytest' and any other testing requirements to 'tests_require'.
 - Invoke tests with `setup.py pytest`.
+- Pass `--index-url` to have test requirements downloaded from an alternate
+  index URL.
+- Pass additional py.test command-line options using `--addopts`.
+- Set options in the `[pytest]` section of setup.cfg.
 
 See the `jaraco.util <https://bitbucket.org/jaraco/jaraco.util/>`_ project
 for an example.
