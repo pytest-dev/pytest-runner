@@ -8,6 +8,7 @@ setup_params = dict(
 	author="Jason R. Coombs",
 	author_email="jaraco@jaraco.com",
 	url="https://bitbucket.org/jaraco/pytest-runner",
+	description="Setup scripts can use pytest-runner to add setup.py test support for pytest runner.",
 	py_modules = ['ptr'],
 	zip_safe=True,
 	entry_points = {
