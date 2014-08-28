@@ -39,8 +39,8 @@ class PyTest(orig.test):
 		if self.distribution.tests_require:
 			self.distribution.fetch_build_eggs(self.distribution.tests_require)
 		if self.distribution.extras_require and self.extras:
-			map(self.distribution.fetch_build_eggs,
-				self.distribution.extras_require.values())
+			list(map(self.distribution.fetch_build_eggs,
+				self.distribution.extras_require.values()))
 		if self.dry_run:
 			self.announce('skipping tests (dry run)')
 			return
