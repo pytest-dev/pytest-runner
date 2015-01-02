@@ -22,6 +22,12 @@ for an example.
 Changes
 -------
 
+2.2
+~~~
+
+* Honor ``.eggs`` directory for transient downloads as introduced in Setuptools
+  7.0.
+
 2.1
 ~~~
 
