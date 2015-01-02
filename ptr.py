@@ -74,8 +74,10 @@ class PyTest(orig.test):
 			opts['allow_hosts'] = ('test', self.allow_hosts)
 		if self.index_url:
 			opts['index_url'] = ('test', self.index_url)
+		install_dir_func = getattr(dist, 'get_egg_cache_dir', _os.curdir)
+		install_dir = install_dir_func()
 		cmd = easy_install(
-			dist, args=["x"], install_dir=_os.curdir, exclude_scripts=True,
+			dist, args=["x"], install_dir=install_dir, exclude_scripts=True,
 			always_copy=False, build_directory=None, editable=False,
 			upgrade=False, multi_version=True, no_report = True
 		)
