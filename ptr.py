@@ -4,8 +4,21 @@ Implementation
 
 import os as _os
 import shlex as _shlex
+import contextlib as _contextlib
+import sys as _sys
 
 import setuptools.command.test as orig
+
+@_contextlib.contextmanager
+def _save_argv(repl=None):
+    saved = _sys.argv[:]
+    if repl is not None:
+        _sys.argv[:] = repl
+    try:
+        yield saved
+    finally:
+        _sys.argv[:] = saved
+
 
 class PyTest(orig.test):
 	user_options = [
@@ -86,12 +99,7 @@ class PyTest(orig.test):
 
 	def run_tests(self):
 		"""
-		Override run_tests to invoke pytest.
+		Invoke pytest, replacing argv.
 		"""
-		import pytest
-		import sys
-		# hide command-line arguments from pytest.main
-		argv_saved = list(sys.argv)
-		sys.argv[1:] = self.addopts
-		self.result_code = pytest.main()
-		sys.argv[:] = argv_saved
+		with _save_argv(_sys.argv[:1] + self.addopts):
+			self.result_code = __import__('pytest').main()
