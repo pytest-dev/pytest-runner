@@ -10,14 +10,50 @@ Usage
 - Add 'pytest-runner' to your 'setup_requires'. Pin to '>=2.0,<3dev' (or
   similar) to avoid pulling in incompatible versions.
 - Include 'pytest' and any other testing requirements to 'tests_require'.
-- Invoke tests with `setup.py pytest`.
-- Pass `--index-url` to have test requirements downloaded from an alternate
+- Invoke tests with ``setup.py pytest``.
+- Pass ``--index-url`` to have test requirements downloaded from an alternate
   index URL.
-- Pass additional py.test command-line options using `--addopts`.
-- Set options in the `[pytest]` section of setup.cfg.
+- Pass additional py.test command-line options using ``--addopts``.
+- Set permanent options for the pytest distutils command in the ``[pytest]``
+  section of setup.cfg.
+- Set permanent options for the pytest run itself in the ``[pytest]``
+  section of pytest.ini or tox.ini. See `pytest 567
+  <https://bitbucket.org/hpk42/pytest/issue/567>`_ for details on
+  why setup.cfg is inadequate.
+- Optionally, set ``test=pytest`` in the ``[aliases]`` section of setup.cfg
+  to cause ``setup.py test`` to invoke pytest.
 
-See the `jaraco.util <https://bitbucket.org/jaraco/jaraco.util/>`_ project
-for an example.
+Example
+-------
+
+See the `jaraco.collections
+<https://bitbucket.org/jaraco/jaraco.collections/>`_ project
+for example usage.
+
+Considerations
+--------------
+
+Conditional Requirement
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Because it uses Setuptools setup_requires, pytest-runner will install itself
+on every invocation of setup.py. In some cases, this causes delays for
+invocations of setup.py that will never invoke pytest-runner. To help avoid
+this contingency, consider requiring pytest-runner only when pytest
+is invoked::
+
+    needs_pytest = {'pytest', 'test', 'ptr'}.intersection(sys.argv)
+    pytest_runner = ['pytest_runner'] if needs_pytest else []
+
+    # ...
+
+    setup(
+    	#...
+    	setup_requires=[
+    		#... (other setup requirements)
+    	] + pytest_runner,
+    )
+
 
 Changes
 -------
