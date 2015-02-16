@@ -58,6 +58,11 @@ is invoked::
 Changes
 -------
 
+2.3
+~~~
+
+* Use hgdistver for version management and file discovery.
+
 2.2
 ~~~
 

@@ -4,7 +4,7 @@ import setuptools
 
 setup_params = dict(
 	name='pytest-runner',
-	use_hg_version=True,
+	get_version_from_scm=True,
 	author="Jason R. Coombs",
 	author_email="jaraco@jaraco.com",
 	url="https://bitbucket.org/jaraco/pytest-runner",
@@ -27,7 +27,7 @@ setup_params = dict(
 		"Programming Language :: Python :: 3",
 	],
 	setup_requires=[
-		'hgtools',
+		'hgdistver',
 	],
 )
 if __name__ == '__main__':
