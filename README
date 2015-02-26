@@ -26,9 +26,24 @@ Usage
 Example
 -------
 
+The most simple usage looks like this in setup.py::
+
+    setup(
+        setup_requires=[
+            'pytest-runner',
+        ],
+        tests_require=[
+            'pytest',
+        ],
+    )
+
+Additional dependencies require to run the tests (e.g. mock or pytest
+plugins) may be added to tests_require and will be downloaded and
+required by the session before invoking pytest.
+
 See the `jaraco.collections
 <https://bitbucket.org/jaraco/jaraco.collections/>`_ project
-for example usage.
+for real-world usage.
 
 Considerations
 --------------
