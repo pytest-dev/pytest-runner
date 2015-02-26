@@ -48,10 +48,10 @@ is invoked::
     # ...
 
     setup(
-    	#...
-    	setup_requires=[
-    		#... (other setup requirements)
-    	] + pytest_runner,
+        #...
+        setup_requires=[
+            #... (other setup requirements)
+        ] + pytest_runner,
     )
 
 
