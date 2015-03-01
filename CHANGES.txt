@@ -1,3 +1,11 @@
+2.4
+~~~
+
+* Added `documentation <https://pythonhosted.org/pytest-runner>`_.
+* Use setuptools_scm for version management and file discovery.
+* Updated internal packaging technique. README is now included
+  in the package metadata.
+
 2.3
 ~~~
 
