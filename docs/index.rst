@@ -6,6 +6,7 @@ Welcome to pytest-runner documentation!
 
    history
 
+.. include:: ../README.txt
 
 Indices and tables
 ==================
