@@ -83,7 +83,7 @@ this contingency, consider requiring pytest-runner only when pytest
 is invoked::
 
     needs_pytest = {'pytest', 'test', 'ptr'}.intersection(sys.argv)
-    pytest_runner = ['pytest_runner'] if needs_pytest else []
+    pytest_runner = ['pytest-runner'] if needs_pytest else []
 
     # ...
 
