@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import hgtools.managers
-
-# use hgtools to get the version
-hg_mgr = hgtools.managers.RepoManager.get_first_valid_manager()
+import setuptools_scm
 
 extensions = [
     'sphinx.ext.autodoc',
@@ -15,7 +12,7 @@ project = 'pytest-runner'
 copyright = '2015 Jason R. Coombs'
 
 # The short X.Y version.
-version = hg_mgr.get_current_version()
+version = setuptools_scm.get_version()
 # The full version, including alpha/beta/rc tags.
 release = version
 
