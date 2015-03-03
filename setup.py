@@ -11,7 +11,7 @@ with io.open('README.txt', encoding='utf-8') as readme:
 	long_description = readme.read()
 
 needs_pytest = {'pytest', 'test'}.intersection(sys.argv)
-pytest_runner = ['pytest_runner'] if needs_pytest else []
+pytest_runner = ['pytest-runner'] if needs_pytest else []
 needs_sphinx = {'release', 'build_sphinx', 'upload_docs'}.intersection(sys.argv)
 sphinx = ['sphinx'] if needs_sphinx else []
 
