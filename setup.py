@@ -23,7 +23,7 @@ setup_params = dict(
 	description="Invoke py.test as distutils command with dependency "
 		"resolution.",
 	long_description=long_description,
-	url="https://bitbucket.org/jaraco/pytest-runner",
+	url="https://bitbucket.org/pytest-dev/pytest-runner",
 	py_modules=['ptr'],
 	entry_points = {
 		'distutils.commands': [

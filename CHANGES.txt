@@ -1,3 +1,9 @@
+2.5
+~~~
+
+* Moved hosting to `pytest-dev
+<https://bitbucket.org/pytest-dev/pytest-runner>`_.
+
 2.4
 ~~~
 
