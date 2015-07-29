@@ -7,7 +7,9 @@ import shlex as _shlex
 import contextlib as _contextlib
 import sys as _sys
 
+import pkg_resources
 import setuptools.command.test as orig
+
 
 @_contextlib.contextmanager
 def _save_argv(repl=None):
@@ -41,6 +43,18 @@ class PyTest(orig.test):
 		if self.addopts:
 			self.addopts = _shlex.split(self.addopts)
 
+	@staticmethod
+	def marker_passes(marker):
+		"""
+		Given an environment marker, return True if the marker is valid
+		and matches this environment.
+		"""
+		return (
+			marker
+			and not pkg_resources.invalid_marker(marker)
+			and pkg_resources.evaluate_marker(marker)
+		)
+
 	def run(self):
 		"""
 		Override run to ensure requirements are available in this session (but
@@ -49,6 +63,11 @@ class PyTest(orig.test):
 		self._build_egg_fetcher()
 		if self.distribution.install_requires:
 			self.distribution.fetch_build_eggs(self.distribution.install_requires)
+		# include environment-specific unnamed environment markers
+		for spec, reqs in self.distribution.extras_require.items():
+			name, sep, marker = spec.partition(':')
+			if not name and self.marker_passes(marker):
+				self.distribution.fetch_build_eggs(reqs)
 		if self.distribution.tests_require:
 			self.distribution.fetch_build_eggs(self.distribution.tests_require)
 		if self.distribution.extras_require and self.extras:

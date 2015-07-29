@@ -1,3 +1,8 @@
+2.6
+~~~
+
+* Add support for un-named, environment-specific extras.
+
 2.5.1
 ~~~~~
 
