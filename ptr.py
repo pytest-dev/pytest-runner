@@ -11,13 +11,13 @@ import setuptools.command.test as orig
 
 @_contextlib.contextmanager
 def _save_argv(repl=None):
-    saved = _sys.argv[:]
-    if repl is not None:
-        _sys.argv[:] = repl
-    try:
-        yield saved
-    finally:
-        _sys.argv[:] = saved
+	saved = _sys.argv[:]
+	if repl is not None:
+		_sys.argv[:] = repl
+	try:
+		yield saved
+	finally:
+		_sys.argv[:] = saved
 
 
 class PyTest(orig.test):
