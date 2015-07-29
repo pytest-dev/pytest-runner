@@ -63,16 +63,16 @@ class PyTest(orig.test):
 		self._build_egg_fetcher()
 		if self.distribution.install_requires:
 			self.distribution.fetch_build_eggs(self.distribution.install_requires)
-		# include environment-specific unnamed environment markers
-		for spec, reqs in self.distribution.extras_require.items():
-			name, sep, marker = spec.partition(':')
-			if not name and self.marker_passes(marker):
-				self.distribution.fetch_build_eggs(reqs)
 		if self.distribution.tests_require:
 			self.distribution.fetch_build_eggs(self.distribution.tests_require)
-		if self.distribution.extras_require and self.extras:
-			list(map(self.distribution.fetch_build_eggs,
-				self.distribution.extras_require.values()))
+		extras_require = self.distribution.extras_require or {}
+		for spec, reqs in extras_require.items():
+			name, sep, marker = spec.partition(':')
+			if not self.marker_passes(marker):
+				continue
+			# always include unnamed extras
+			if not name or self.extras:
+				self.distribution.fetch_build_eggs(reqs)
 		if self.dry_run:
 			self.announce('skipping tests (dry run)')
 			return
