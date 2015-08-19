@@ -68,7 +68,7 @@ class PyTest(orig.test):
 		extras_require = self.distribution.extras_require or {}
 		for spec, reqs in extras_require.items():
 			name, sep, marker = spec.partition(':')
-			if not self.marker_passes(marker):
+			if marker and not self.marker_passes(marker):
 				continue
 			# always include unnamed extras
 			if not name or self.extras:
