@@ -39,7 +39,6 @@ setup_params = dict(
 	tests_require=[
 		'pytest',
 	],
-	license='MIT',
 	classifiers=[
 		"Development Status :: 5 - Production/Stable",
 		"Intended Audience :: Developers",
