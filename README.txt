@@ -18,7 +18,7 @@ Usage
   section of setup.cfg.
 - Set permanent options for the pytest run itself in the ``[pytest]``
   section of pytest.ini or tox.ini. See `pytest 567
-  <https://bitbucket.org/hpk42/pytest/issue/567>`_ for details on
+  <https://bitbucket.org/pytest-dev/pytest/issues/567/>`_ for details on
   why setup.cfg is inadequate.
 - Optionally, set ``test=pytest`` in the ``[aliases]`` section of setup.cfg
   to cause ``setup.py test`` to invoke pytest.
