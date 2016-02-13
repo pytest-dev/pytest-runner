@@ -53,9 +53,13 @@ runner support to maintained packages, ``pytest-runner`` may
 also be used to create standalone tests. Consider `this example
 failure <https://gist.github.com/jaraco/d979a558bc0bf2194c23>`_,
 reported in `jsonpickle #117
-<https://github.com/jsonpickle/jsonpickle/issues/117>`_.
+<https://github.com/jsonpickle/jsonpickle/issues/117>`_
+or `this MongoDB test
+<https://gist.github.com/jaraco/0b9e482f5c0a1300dc9a>`_
+demonstrating a technique that works even when dependencies
+are required in the test.
 
-That single file may be cloned or downloaded and simply run on
+Either example file may be cloned or downloaded and simply run on
 any system with Python and Setuptools. It will download the
 specified dependencies and run the tests. Afterward, the the
 cloned directory can be removed and with it all trace of
