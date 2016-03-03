@@ -42,7 +42,7 @@ plugins) may be added to tests_require and will be downloaded and
 required by the session before invoking pytest.
 
 See the `jaraco.collections
-<https://bitbucket.org/jaraco/jaraco.collections/>`_ project
+<https://github.com/jaraco/jaraco.collections>`_ project
 for real-world usage.
 
 Standalone Example
