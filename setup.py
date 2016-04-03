@@ -13,19 +13,22 @@ with io.open('README.rst', encoding='utf-8') as readme:
 needs_pytest = set(['pytest', 'test']).intersection(sys.argv)
 pytest_runner = ['pytest_runner'] if needs_pytest else []
 needs_sphinx = set(['release', 'build_sphinx', 'upload_docs']).intersection(sys.argv)
-sphinx = ['sphinx'] if needs_sphinx else []
+sphinx = ['sphinx', 'rst.linker'] if needs_sphinx else []
 needs_wheel = set(['release', 'bdist_wheel']).intersection(sys.argv)
 wheel = ['wheel'] if needs_wheel else []
 
+name = 'pytest-runner'
+description = 'Invoke py.test as distutils command with dependency resolution'
+
 setup_params = dict(
-	name='pytest-runner',
+	name=name,
 	use_scm_version=True,
 	author="Jason R. Coombs",
 	author_email="jaraco@jaraco.com",
-	description="Invoke py.test as distutils command with dependency "
-		"resolution.",
+	description=description or name,
 	long_description=long_description,
-	url="https://github.com/pytest-dev/pytest-runner",
+	url="https://github.com/pytest-dev/" + name,
+	namespace_packages=name.split('.')[:-1],
 	py_modules=['ptr'],
 	install_requires=[
 	],
