@@ -28,7 +28,7 @@ link_files = {
 		replace=[
 			dict(
 				pattern=r"(Issue )?#(?P<issue>\d+)",
-				url='{GH}/jaraco/{project}/issues/{issue}',
+				url='{GH}/pytest-dev/{project}/issues/{issue}',
 			),
 			dict(
 				pattern=r"^(?m)((?P<scm_version>v?\d+(\.\d+){1,2}))\n[-=]+\n",
