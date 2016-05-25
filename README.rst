@@ -12,7 +12,7 @@ Usage
 - Include 'pytest' and any other testing requirements to 'tests_require'.
 - Invoke tests with ``setup.py pytest``.
 - Pass ``--index-url`` to have test requirements downloaded from an alternate
-  index URL.
+  index URL (unnecessary if specified for easy_install in setup.cfg).
 - Pass additional py.test command-line options using ``--addopts``.
 - Set permanent options for the pytest distutils command in the ``[pytest]``
   section of setup.cfg.
