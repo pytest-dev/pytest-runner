@@ -1,3 +1,9 @@
+2.8
+~~~
+
+* #16: Added a license file, required for membership to
+  pytest-dev.
+
 2.7
 ~~~
 
