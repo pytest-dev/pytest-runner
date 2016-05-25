@@ -23,6 +23,12 @@ def _save_argv(repl=None):
 
 
 class PyTest(orig.test):
+	"""
+	>>> import setuptools
+	>>> dist = setuptools.Distribution()
+	>>> cmd = PyTest(dist)
+	"""
+
 	user_options = [
 		('extras', None, "Install (all) setuptools extras when running tests"),
 		('index-url=', None, "Specify an index url from which to retrieve "

@@ -3,6 +3,8 @@
 
 * #16: Added a license file, required for membership to
   pytest-dev.
+* Releases are now made automatically by pushing a
+  tagged release that passes tests on Python 3.5.
 
 2.7
 ~~~
