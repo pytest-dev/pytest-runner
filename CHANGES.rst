@@ -1,3 +1,9 @@
+2.9
+~~~
+
+* Added Trove Classifier indicating this package is part
+  of the pytest framework.
+
 2.8
 ~~~
 
