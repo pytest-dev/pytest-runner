@@ -5,8 +5,8 @@
 
 .. image:: https://img.shields.io/pypi/dm/pytest-runner.svg
 
-.. image:: https://img.shields.io/travis/jaraco/pytest-runner/master.svg
-   :target: http://travis-ci.org/jaraco/pytest-runner
+.. image:: https://img.shields.io/travis/pytest-dev/pytest-runner/master.svg
+   :target: http://travis-ci.org/pytest-dev/pytest-runner
 
 Setup scripts can use pytest-runner to add setup.py test support for pytest
 runner.
