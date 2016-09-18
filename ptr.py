@@ -6,6 +6,14 @@ import os as _os
 import shlex as _shlex
 import contextlib as _contextlib
 import sys as _sys
+import operator as _operator
+import itertools as _itertools
+
+try:
+	# ensure that map has the same meaning on Python 2
+	from future_builtins import map
+except ImportError:
+	pass
 
 import pkg_resources
 import setuptools.command.test as orig
@@ -20,6 +28,11 @@ def _save_argv(repl=None):
 		yield saved
 	finally:
 		_sys.argv[:] = saved
+
+
+@_contextlib.contextmanager
+def null():
+	yield
 
 
 class PyTest(orig.test):
@@ -61,28 +74,73 @@ class PyTest(orig.test):
 			and pkg_resources.evaluate_marker(marker)
 		)
 
+	@staticmethod
+	def _install_dists_compat(dist):
+		"""
+		Copy of install_dists from setuptools 27.3.0.
+		"""
+		ir_d = dist.fetch_build_eggs(dist.install_requires or [])
+		tr_d = dist.fetch_build_eggs(dist.tests_require or [])
+		return _itertools.chain(ir_d, tr_d)
+
+	def install_dists(self, dist):
+		"""
+		Extend install_dists to include extras support
+		"""
+		i_d = getattr(orig.test, 'install_dists', self._install_dists_compat)
+		return _itertools.chain(i_d(dist), self.install_extra_dists(dist))
+
+	def install_extra_dists(self, dist):
+		"""
+		Install extras that are indicated by markers or
+		install all extras if '--extras' is indicated.
+		"""
+		extras_require = dist.extras_require or {}
+
+		spec_extras = (
+			(spec.partition(':'), reqs)
+			for spec, reqs in extras_require.items()
+		)
+		matching_extras = (
+			reqs
+			for (name, sep, marker), reqs in spec_extras
+			# never include extras that fail to pass marker eval
+			if marker and not self.marker_passes(marker)
+			# include unnamed extras or all if self.extras indicated
+			and (not name or self.extras)
+		)
+		results = list(map(dist.fetch_build_eggs, matching_extras))
+		return _itertools.chain.from_iterable(results)
+
+	@staticmethod
+	def paths_on_pythonpath(paths):
+		"""
+		Backward compatibility for paths_on_pythonpath;
+		Returns a null context if paths_on_pythonpath is
+		not implemented in orig.test.
+		Note that this also means that the paths iterable
+		is never consumed, which incidentally means that
+		the None values from dist.fetch_build_eggs in
+		older Setuptools will be disregarded.
+		"""
+		try:
+			return orig.test.paths_on_pythonpath(paths)
+		except AttributeError:
+			return null()
+
 	def run(self):
 		"""
 		Override run to ensure requirements are available in this session (but
 		don't install them anywhere).
 		"""
 		self._build_egg_fetcher()
-		if self.distribution.install_requires:
-			self.distribution.fetch_build_eggs(self.distribution.install_requires)
-		if self.distribution.tests_require:
-			self.distribution.fetch_build_eggs(self.distribution.tests_require)
-		extras_require = self.distribution.extras_require or {}
-		for spec, reqs in extras_require.items():
-			name, sep, marker = spec.partition(':')
-			if marker and not self.marker_passes(marker):
-				continue
-			# always include unnamed extras
-			if not name or self.extras:
-				self.distribution.fetch_build_eggs(reqs)
+		installed_dists = self.install_dists(self.distribution)
 		if self.dry_run:
 			self.announce('skipping tests (dry run)')
 			return
-		self.with_project_on_sys_path(self.run_tests)
+		paths = map(_operator.attrgetter('location'), installed_dists)
+		with self.paths_on_pythonpath(paths):
+			self.with_project_on_sys_path(self.run_tests)
 		if self.result_code:
 			raise SystemExit(self.result_code)
 		return self.result_code

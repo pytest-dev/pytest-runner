@@ -1,3 +1,12 @@
+2.10
+~~~~
+
+* #20: Leverage technique in `setuptools 794
+  <https://github.com/pypa/setuptools/issues/794>`_
+  to populate PYTHONPATH during test runs such that
+  Python subprocesses will have a dependency context
+  comparable to the test runner.
+
 2.9
 ~~~
 
