@@ -128,12 +128,11 @@ class PyTest(orig.test):
 		except AttributeError:
 			return null()
 
-	def run(self):
-		"""
-		Override run to ensure requirements are available in this session (but
-		don't install them anywhere).
-		"""
-		self._build_egg_fetcher()
+	def _super_run(self):
+		if hasattr(orig.test, 'install_dists'):
+			return orig.test.run(self)
+
+		# for backward compatibility with setuptools < 27.3
 		installed_dists = self.install_dists(self.distribution)
 		if self.dry_run:
 			self.announce('skipping tests (dry run)')
@@ -141,6 +140,14 @@ class PyTest(orig.test):
 		paths = map(_operator.attrgetter('location'), installed_dists)
 		with self.paths_on_pythonpath(paths):
 			self.with_project_on_sys_path(self.run_tests)
+
+	def run(self):
+		"""
+		Override run to ensure requirements are available in this session (but
+		don't install them anywhere).
+		"""
+		self._build_egg_fetcher()
+		self._super_run()
 		if self.result_code:
 			raise SystemExit(self.result_code)
 		return self.result_code
@@ -179,6 +186,10 @@ class PyTest(orig.test):
 		)
 		cmd.ensure_finalized()
 		main_dist._egg_fetcher = cmd
+
+	@property
+	def _argv(self):
+		return ['pytest'] + self.addopts
 
 	def run_tests(self):
 		"""
