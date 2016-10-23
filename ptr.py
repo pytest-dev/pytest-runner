@@ -165,7 +165,7 @@ class PyTest(orig.test):
 			'find_links', 'site_dirs', 'index_url', 'optimize',
 			'site_dirs', 'allow_hosts'
 		)
-		for key in opts.keys():
+		for key in list(opts.keys()):
 			if key not in keep:
 				del opts[key]   # don't use any other settings
 		if main_dist.dependency_links:
