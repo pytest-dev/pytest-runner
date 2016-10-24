@@ -56,7 +56,7 @@ Standalone Example
 ------------------
 
 This technique is deprecated - if you have standalone scripts
-you wish to invoke with dependincies, `use rwt
+you wish to invoke with dependencies, `use rwt
 <https://pypi.org/project/rwt>`_.
 
 Although ``pytest-runner`` is typically used to add pytest test
