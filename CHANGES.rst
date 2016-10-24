@@ -1,3 +1,8 @@
+2.10.1
+~~~~~~
+
+* #21: Avoid mutating dictionary keys during iteration.
+
 2.10
 ~~~~
 
