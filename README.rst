@@ -52,9 +52,9 @@ Additional dependencies require to run the tests (e.g. mock or pytest
 plugins) may be added to tests_require and will be downloaded and
 required by the session before invoking pytest.
 
-See the `jaraco.collections
-<https://github.com/jaraco/jaraco.collections>`_ project
-for real-world usage.
+Follow `this search on github
+<https://github.com/search?utf8=%E2%9C%93&q=filename%3Asetup.py+pytest-runner&type=Code&ref=searchresults>`_
+for examples of real-world usage.
 
 Standalone Example
 ------------------
