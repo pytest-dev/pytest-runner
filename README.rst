@@ -29,14 +29,14 @@ Usage
 - Pass ``--index-url`` to have test requirements downloaded from an alternate
   index URL (unnecessary if specified for easy_install in setup.cfg).
 - Pass additional py.test command-line options using ``--addopts``.
-- Set permanent options for the pytest distutils command in the ``[pytest]``
-  section of setup.cfg.
-- Set permanent options for the pytest run itself in the ``[pytest]``
-  section of pytest.ini or tox.ini. See `pytest 567
-  <https://bitbucket.org/pytest-dev/pytest/issues/567/>`_ for details on
-  why setup.cfg is inadequate.
-- Optionally, set ``test=pytest`` in the ``[aliases]`` section of setup.cfg
-  to cause ``setup.py test`` to invoke pytest.
+- Set permanent options for the ``python setup.py pytest`` command (like ``index-url``)
+  in the ``[pytest]`` section of ``setup.cfg``.
+- Set permanent options for the ``py.test`` run (like ``addopts`` or ``pep8ignore``) in the ``[pytest]``
+  section of ``pytest.ini`` or ``tox.ini`` or put them in the ``[tool:pytest]``
+  section of ``setup.cfg``. See `pytest issue 567
+  <https://bitbucket.org/pytest-dev/pytest/issues/567/>`_.
+- Optionally, set ``test=pytest`` in the ``[aliases]`` section of ``setup.cfg``
+  to cause ``python setup.py test`` to invoke pytest.
 
 Example
 -------
