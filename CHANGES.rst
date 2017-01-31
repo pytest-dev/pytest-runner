@@ -1,3 +1,9 @@
+2.11
+~~~~
+
+* #27: Improved wording in the README around configuration
+  for the distutils command and pytest proper.
+
 2.10.1
 ~~~~~~
 
