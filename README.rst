@@ -34,7 +34,7 @@ Usage
 - Set permanent options for the ``py.test`` run (like ``addopts`` or ``pep8ignore``) in the ``[pytest]``
   section of ``pytest.ini`` or ``tox.ini`` or put them in the ``[tool:pytest]``
   section of ``setup.cfg``. See `pytest issue 567
-  <https://bitbucket.org/pytest-dev/pytest/issues/567/>`_.
+  <https://github.com/pytest-dev/pytest/issues/567>`_.
 - Optionally, set ``test=pytest`` in the ``[aliases]`` section of ``setup.cfg``
   to cause ``python setup.py test`` to invoke pytest.
 
