@@ -105,7 +105,7 @@ class PyTest(orig.test):
 			reqs
 			for (name, sep, marker), reqs in spec_extras
 			# never include extras that fail to pass marker eval
-			if marker and not self.marker_passes(marker)
+			if self.marker_passes(marker)
 			# include unnamed extras or all if self.extras indicated
 			and (not name or self.extras)
 		)
