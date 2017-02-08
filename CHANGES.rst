@@ -1,3 +1,8 @@
+2.11.1
+~~~~~~
+
+* #28: Fix logic in marker evaluation.
+
 2.11
 ~~~~
 
