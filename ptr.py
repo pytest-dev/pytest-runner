@@ -17,6 +17,7 @@ except ImportError:
 
 import pkg_resources
 import setuptools.command.test as orig
+from setuptools import Distribution
 
 
 @_contextlib.contextmanager
@@ -33,6 +34,46 @@ def _save_argv(repl=None):
 @_contextlib.contextmanager
 def null():
 	yield
+
+
+class CustomizedDist(Distribution):
+
+	allow_hosts = None
+	index_url = None
+
+	def fetch_build_egg(self, req):
+		""" Specialized version of Distribution.fetch_build_egg
+		that respects respects allow_hosts and index_url. """
+		from setuptools.command.easy_install import easy_install
+		dist = Distribution({'script_args': ['easy_install']})
+		dist.parse_config_files()
+		opts = dist.get_option_dict('easy_install')
+		keep = (
+			'find_links', 'site_dirs', 'index_url', 'optimize',
+			'site_dirs', 'allow_hosts'
+		)
+		for key in list(opts):
+			if key not in keep:
+				del opts[key]  # don't use any other settings
+		if self.dependency_links:
+			links = self.dependency_links[:]
+			if 'find_links' in opts:
+				links = opts['find_links'][1].split() + links
+			opts['find_links'] = ('setup', links)
+		if self.allow_hosts:
+			opts['allow_hosts'] = ('test', self.allow_hosts)
+		if self.index_url:
+			opts['index_url'] = ('test', self.index_url)
+		install_dir_func = getattr(self, 'get_egg_cache_dir', _os.getcwd)
+		install_dir = install_dir_func()
+		cmd = easy_install(
+			dist, args=["x"], install_dir=install_dir,
+			exclude_scripts=True,
+			always_copy=False, build_directory=None, editable=False,
+			upgrade=False, multi_version=True, no_report=True, user=False
+		)
+		cmd.ensure_finalized()
+		return cmd.easy_install(req)
 
 
 class PyTest(orig.test):
@@ -129,11 +170,12 @@ class PyTest(orig.test):
 			return null()
 
 	def _super_run(self):
-		if hasattr(orig.test, 'install_dists'):
-			return orig.test.run(self)
-
-		# for backward compatibility with setuptools < 27.3
-		installed_dists = self.install_dists(self.distribution)
+		dist = CustomizedDist()
+		for attr in 'allow_hosts index_url'.split():
+			setattr(dist, attr, getattr(self, attr))
+		for attr in 'install_requires tests_require extras_require'.split():
+			setattr(dist, attr, getattr(self.distribution, attr))
+		installed_dists = self.install_dists(dist)
 		if self.dry_run:
 			self.announce('skipping tests (dry run)')
 			return
@@ -146,46 +188,10 @@ class PyTest(orig.test):
 		Override run to ensure requirements are available in this session (but
 		don't install them anywhere).
 		"""
-		self._build_egg_fetcher()
 		self._super_run()
 		if self.result_code:
 			raise SystemExit(self.result_code)
 		return self.result_code
-
-	def _build_egg_fetcher(self):
-		"""Build an egg fetcher that respects index_url and allow_hosts"""
-		# modified from setuptools.dist:Distribution.fetch_build_egg
-		from setuptools.command.easy_install import easy_install
-		main_dist = self.distribution
-		# construct a fake distribution to store the args for easy_install
-		dist = main_dist.__class__({'script_args': ['easy_install']})
-		dist.parse_config_files()
-		opts = dist.get_option_dict('easy_install')
-		keep = (
-			'find_links', 'site_dirs', 'index_url', 'optimize',
-			'site_dirs', 'allow_hosts'
-		)
-		for key in list(opts.keys()):
-			if key not in keep:
-				del opts[key]   # don't use any other settings
-		if main_dist.dependency_links:
-			links = main_dist.dependency_links[:]
-			if 'find_links' in opts:
-				links = opts['find_links'][1].split() + links
-			opts['find_links'] = ('setup', links)
-		if self.allow_hosts:
-			opts['allow_hosts'] = ('test', self.allow_hosts)
-		if self.index_url:
-			opts['index_url'] = ('test', self.index_url)
-		install_dir_func = getattr(dist, 'get_egg_cache_dir', _os.getcwd)
-		install_dir = install_dir_func()
-		cmd = easy_install(
-			dist, args=["x"], install_dir=install_dir, exclude_scripts=True,
-			always_copy=False, build_directory=None, editable=False,
-			upgrade=False, multi_version=True, no_report = True
-		)
-		cmd.ensure_finalized()
-		main_dist._egg_fetcher = cmd
 
 	@property
 	def _argv(self):
