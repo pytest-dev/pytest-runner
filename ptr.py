@@ -104,10 +104,10 @@ class PyTest(orig.test):
 		matching_extras = (
 			reqs
 			for (name, sep, marker), reqs in spec_extras
-			# never include extras that fail to pass marker eval
-			if self.marker_passes(marker)
 			# include unnamed extras or all if self.extras indicated
-			and (not name or self.extras)
+			if (not name or self.extras)
+			# never include extras that fail to pass marker eval
+			and (not marker or self.marker_passes(marker))
 		)
 		results = list(map(dist.fetch_build_eggs, matching_extras))
 		return _itertools.chain.from_iterable(results)

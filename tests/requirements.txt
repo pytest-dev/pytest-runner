@@ -1,2 +1,4 @@
 pytest >= 2.8
+pytest-virtualenv
+importlib; python_version=="2.6"
 subprocess32; python_version=="2.6"
