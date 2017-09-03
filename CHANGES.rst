@@ -1,3 +1,12 @@
+2.12
+~~~~
+
+* #30: Rework support for ``--allow-hosts`` and
+  ``--index-url``, removing dependence on
+  ``setuptools.Distribution``'s private member.
+  Additionally corrects logic in marker evaluation
+  along with unit tests!
+
 2.11.1
 ~~~~~~
 
