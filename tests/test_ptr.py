@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 
-import contextlib
 import io
 import os
 import sys
@@ -16,26 +15,13 @@ def DALS(s):
     return textwrap.dedent(s).lstrip()
 
 
-def _tarfile_open_ex(*args, **kwargs):
-    """
-    Extend result as a context manager.
-    """
-    return contextlib.closing(tarfile.open(*args, **kwargs))
-
-
-if sys.version_info[:2] < (2, 7) or (3, 0) <= sys.version_info[:2] < (3, 2):
-    tarfile_open = _tarfile_open_ex
-else:
-    tarfile_open = tarfile.open
-
-
 def make_sdist(dist_path, files):
     """
     Create a simple sdist tarball at dist_path, containing the files
     listed in ``files`` as ``(filename, content)`` tuples.
     """
 
-    with tarfile_open(dist_path, 'w:gz') as dist:
+    with tarfile.open(dist_path, 'w:gz') as dist:
         for filename, content in files:
             file_bytes = io.BytesIO(content.encode('utf-8'))
             file_info = tarfile.TarInfo(name=filename)

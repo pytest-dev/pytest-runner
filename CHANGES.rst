@@ -1,3 +1,8 @@
+3.0
+~~~
+
+* Dropped support for Python 2.6 and 3.1.
+
 2.12
 ~~~~
 

@@ -30,7 +30,7 @@ params = dict(
 		else []
 	),
 	py_modules=['ptr'],
-	python_requires='>=2.6',
+	python_requires='>=2.7,!=3.0,!=3.1',
 	install_requires=[
 	],
 	extras_require={
@@ -38,10 +38,6 @@ params = dict(
 			'pytest>=2.8',
 			'pytest-sugar',
 			'pytest-virtualenv',
-		],
-		'testing:python_version=="2.6"': [
-			# undeclared dependency of pytest-virtualenv
-			'importlib',
 		],
 		'docs': [
 			'sphinx',
@@ -56,7 +52,6 @@ params = dict(
 		"Development Status :: 5 - Production/Stable",
 		"Intended Audience :: Developers",
 		"License :: OSI Approved :: MIT License",
-		"Programming Language :: Python :: 2.6",
 		"Programming Language :: Python :: 2.7",
 		"Programming Language :: Python :: 3",
 		"Framework :: Pytest",
