@@ -110,8 +110,8 @@ class PyTest(orig.test):
 		and matches this environment.
 		"""
 		return (
-			marker
-			and not pkg_resources.invalid_marker(marker)
+			not marker
+			or not pkg_resources.invalid_marker(marker)
 			and pkg_resources.evaluate_marker(marker)
 		)
 
@@ -148,7 +148,7 @@ class PyTest(orig.test):
 			# include unnamed extras or all if self.extras indicated
 			if (not name or self.extras)
 			# never include extras that fail to pass marker eval
-			and (not marker or self.marker_passes(marker))
+			and self.marker_passes(marker)
 		)
 		results = list(map(dist.fetch_build_eggs, matching_extras))
 		return _itertools.chain.from_iterable(results)
