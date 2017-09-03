@@ -49,6 +49,10 @@ link_files = {
 				pattern=r"PEP[- ](?P<pep_number>\d+)",
 				url='https://www.python.org/dev/peps/pep-{pep_number:0>4}/',
 			),
+			dict(
+				pattern=r"Setuptools #(?P<setuptools_issue>\d+)",
+				url='https://github.com/pypa/setuptools/issues/{setuptools_issue}/',
+			),
 		],
 	),
 }
