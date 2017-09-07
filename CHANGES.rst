@@ -1,5 +1,5 @@
-In development
-~~~~~~~~~~~~~~
+2.12.1
+~~~~~~
 
 * #32: Fix support for ``dependency_links``.
 
