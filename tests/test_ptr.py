@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 import contextlib
 import io
 import os
+import shutil
 import sys
 import tarfile
 import textwrap
@@ -101,6 +102,13 @@ def test_egg_fetcher(venv, setuptools_req, test_args):
                 </body></html>
                 '''
             ).format(dist_sdist=dist_sdist))
+    # Move barbazquux1 out of the index.
+    shutil.move(index_dir / 'barbazquux1', venv.workspace)
+    barbazquux1_link = (
+        'file://' + str(venv.workspace.abspath())
+        + '/barbazquux1/barbazquux1-0.1.tar.gz'
+        + '#egg=barbazquux1-0.1'
+    )
     # Prepare fake project.
     project_dir = (venv.workspace / 'project-0.1').mkdir()
     with open(project_dir / 'setup.py', 'w') as fp:
@@ -110,6 +118,9 @@ def test_egg_fetcher(venv, setuptools_req, test_args):
             setup(
                 name='project',
                 version='0.1',
+                dependency_links = [
+                    {barbazquux1_link!r},
+                ],
                 setup_requires=[
                     'pytest-runner',
                 ],
@@ -126,7 +137,8 @@ def test_egg_fetcher(venv, setuptools_req, test_args):
                     'extra': 'barbazquux5',
                 }}
             )
-            ''').format(sys_platform=sys.platform))
+            ''').format(sys_platform=sys.platform,
+                        barbazquux1_link=barbazquux1_link))
     with open(project_dir / 'setup.cfg', 'w') as fp:
         fp.write(DALS(
             '''
