@@ -37,6 +37,7 @@ params = dict(
 		'testing': [
 			'pytest>=2.8',
 			'pytest-sugar',
+			'collective.checkdocs',
 			'pytest-virtualenv',
 		],
 		'testing:python_version=="2.6"': [
