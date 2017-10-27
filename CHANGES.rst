@@ -3,6 +3,16 @@
 
 * Dropped support for Python 2.6 and 3.1.
 
+2.12.2
+~~~~~~
+
+* #33: Packaging refresh.
+
+2.12.1
+~~~~~~
+
+* #32: Fix support for ``dependency_links``.
+
 2.12
 ~~~~
 

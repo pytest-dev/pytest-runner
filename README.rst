@@ -3,21 +3,11 @@
 
 .. image:: https://img.shields.io/pypi/pyversions/pytest-runner.svg
 
-.. image:: https://img.shields.io/pypi/dm/pytest-runner.svg
-
 .. image:: https://img.shields.io/travis/pytest-dev/pytest-runner/master.svg
    :target: http://travis-ci.org/pytest-dev/pytest-runner
 
 Setup scripts can use pytest-runner to add setup.py test support for pytest
 runner.
-
-
-License
-=======
-
-License is indicated in the project metadata (typically one or more
-of the Trove classifiers). For more details, see `this explanation
-<https://github.com/jaraco/skeleton/issues/1>`_.
 
 Usage
 -----

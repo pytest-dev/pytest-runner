@@ -173,7 +173,10 @@ class PyTest(orig.test):
 		dist = CustomizedDist()
 		for attr in 'allow_hosts index_url'.split():
 			setattr(dist, attr, getattr(self, attr))
-		for attr in 'install_requires tests_require extras_require'.split():
+		for attr in (
+			'dependency_links install_requires '
+			'tests_require extras_require '
+		).split():
 			setattr(dist, attr, getattr(self.distribution, attr))
 		installed_dists = self.install_dists(dist)
 		if self.dry_run:
