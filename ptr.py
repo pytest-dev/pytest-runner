@@ -169,7 +169,11 @@ class PyTest(orig.test):
 		except AttributeError:
 			return null()
 
-	def _super_run(self):
+	def run(self):
+		"""
+		Override run to ensure requirements are available in this session (but
+		don't install them anywhere).
+		"""
 		dist = CustomizedDist()
 		for attr in 'allow_hosts index_url'.split():
 			setattr(dist, attr, getattr(self, attr))
@@ -185,13 +189,6 @@ class PyTest(orig.test):
 		paths = map(_operator.attrgetter('location'), installed_dists)
 		with self.paths_on_pythonpath(paths):
 			self.with_project_on_sys_path(self.run_tests)
-
-	def run(self):
-		"""
-		Override run to ensure requirements are available in this session (but
-		don't install them anywhere).
-		"""
-		self._super_run()
 
 	@property
 	def _argv(self):
