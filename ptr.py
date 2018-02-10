@@ -192,9 +192,8 @@ class PyTest(orig.test):
 		don't install them anywhere).
 		"""
 		self._super_run()
-		if self.result_code:
+		if getattr(self, 'result_code', None):
 			raise SystemExit(self.result_code)
-		return self.result_code
 
 	@property
 	def _argv(self):
