@@ -2,8 +2,8 @@
 =====
 
 * #38: Fixed AttributeError when running with ``--dry-run``.
-  ``PyTest.run()`` no longer returns the result code. Based on
-  the commit message for `840ff4c <
+  ``PyTest.run()`` no longer stores nor returns the result code.
+  Based on the commit message for `840ff4c <
   https://github.com/pytest-dev/pytest-runner/commit/840ff4c2bf6c752d9770f0dd8d64a841060cf9bc>`_,
   nothing has ever relied on that value.
 

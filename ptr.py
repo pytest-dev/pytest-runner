@@ -192,8 +192,6 @@ class PyTest(orig.test):
 		don't install them anywhere).
 		"""
 		self._super_run()
-		if getattr(self, 'result_code', None):
-			raise SystemExit(self.result_code)
 
 	@property
 	def _argv(self):
@@ -204,4 +202,6 @@ class PyTest(orig.test):
 		Invoke pytest, replacing argv.
 		"""
 		with _save_argv(_sys.argv[:1] + self.addopts):
-			self.result_code = __import__('pytest').main()
+			result_code = __import__('pytest').main()
+			if result_code:
+				raise SystemExit(result_code)
