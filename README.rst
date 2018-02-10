@@ -6,9 +6,6 @@
 .. image:: https://img.shields.io/travis/pytest-dev/pytest-runner/master.svg
    :target: https://travis-ci.org/pytest-dev/pytest-runner
 
-.. image:: https://readthedocs.org/projects/pytest-runner/badge/?version=latest
-   :target: https://pytest-runner.readthedocs.io/en/latest/?badge=latest
-
 Setup scripts can use pytest-runner to add setup.py test support for pytest
 runner.
 
