@@ -188,7 +188,8 @@ class PyTest(orig.test):
 			return
 		paths = map(_operator.attrgetter('location'), installed_dists)
 		with self.paths_on_pythonpath(paths):
-			self.with_project_on_sys_path(self.run_tests)
+			with self.project_on_sys_path():
+				return self.run_tests()
 
 	@property
 	def _argv(self):
@@ -196,7 +197,7 @@ class PyTest(orig.test):
 
 	def run_tests(self):
 		"""
-		Invoke pytest, replacing argv.
+		Invoke pytest, replacing argv. Return result code.
 		"""
 		with _save_argv(_sys.argv[:1] + self.addopts):
 			result_code = __import__('pytest').main()
