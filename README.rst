@@ -13,7 +13,7 @@ Setup scripts can use pytest-runner to add setup.py test support for pytest
 runner.
 
 Usage
------
+=====
 
 - Add 'pytest-runner' to your 'setup_requires'. Pin to '>=2.0,<3dev' (or
   similar) to avoid pulling in incompatible versions.
@@ -32,7 +32,7 @@ Usage
   to cause ``python setup.py test`` to invoke pytest.
 
 Example
--------
+=======
 
 The most simple usage looks like this in setup.py::
 
@@ -54,7 +54,7 @@ Follow `this search on github
 for examples of real-world usage.
 
 Standalone Example
-------------------
+==================
 
 This technique is deprecated - if you have standalone scripts
 you wish to invoke with dependencies, `use rwt
@@ -87,10 +87,10 @@ As a result, the communication barrier for describing and
 replicating failures is made almost trivially low.
 
 Considerations
---------------
+==============
 
 Conditional Requirement
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 Because it uses Setuptools setup_requires, pytest-runner will install itself
 on every invocation of setup.py. In some cases, this causes delays for
