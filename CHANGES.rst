@@ -1,7 +1,7 @@
 4.0
 ===
 
-* Drop support for Setuptools before Setuptools 22.0.1.
+* Drop support for Setuptools before Setuptools 27.3.0.
 
 3.0.1
 =====

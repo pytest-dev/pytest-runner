@@ -40,8 +40,6 @@ def venv(virtualenv):
 
 
 @pytest.mark.parametrize('setuptools_req, test_args', (
-    ('setuptools==27.2.0', ''),
-    ('setuptools==27.2.0', '--extras'),
     ('setuptools==27.3.0', ''),
     ('setuptools==27.3.0', '--extras'),
     ('setuptools==32.3.1', ''),

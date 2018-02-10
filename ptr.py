@@ -31,11 +31,6 @@ def _save_argv(repl=None):
 		_sys.argv[:] = saved
 
 
-@_contextlib.contextmanager
-def null():
-	yield
-
-
 class CustomizedDist(Distribution):
 
 	allow_hosts = None
@@ -115,21 +110,14 @@ class PyTest(orig.test):
 			and pkg_resources.evaluate_marker(marker)
 		)
 
-	@staticmethod
-	def _install_dists_compat(dist):
-		"""
-		Copy of install_dists from setuptools 27.3.0.
-		"""
-		ir_d = dist.fetch_build_eggs(dist.install_requires or [])
-		tr_d = dist.fetch_build_eggs(dist.tests_require or [])
-		return _itertools.chain(ir_d, tr_d)
-
 	def install_dists(self, dist):
 		"""
 		Extend install_dists to include extras support
 		"""
-		i_d = getattr(orig.test, 'install_dists', self._install_dists_compat)
-		return _itertools.chain(i_d(dist), self.install_extra_dists(dist))
+		return _itertools.chain(
+			orig.test.install_dists(dist),
+			self.install_extra_dists(dist),
+		)
 
 	def install_extra_dists(self, dist):
 		"""
@@ -152,22 +140,6 @@ class PyTest(orig.test):
 		)
 		results = list(map(dist.fetch_build_eggs, matching_extras))
 		return _itertools.chain.from_iterable(results)
-
-	@staticmethod
-	def paths_on_pythonpath(paths):
-		"""
-		Backward compatibility for paths_on_pythonpath;
-		Returns a null context if paths_on_pythonpath is
-		not implemented in orig.test.
-		Note that this also means that the paths iterable
-		is never consumed, which incidentally means that
-		the None values from dist.fetch_build_eggs in
-		older Setuptools will be disregarded.
-		"""
-		try:
-			return orig.test.paths_on_pythonpath(paths)
-		except AttributeError:
-			return null()
 
 	def run(self):
 		"""
