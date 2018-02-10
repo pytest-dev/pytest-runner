@@ -7,6 +7,7 @@ import sys
 import tarfile
 import textwrap
 import time
+import itertools
 
 import pytest
 
@@ -39,16 +40,19 @@ def venv(virtualenv):
     virtualenv.teardown()
 
 
-@pytest.mark.parametrize('setuptools_req, test_args', (
-    ('setuptools==27.3.0', ''),
-    ('setuptools==27.3.0', '--extras'),
-    ('setuptools==32.3.1', ''),
-    ('setuptools==32.3.1', '--extras'),
-    ('setuptools==36.3.0', ''),
-    ('setuptools==36.3.0', '--extras'),
-    ('setuptools'        , ''),
-    ('setuptools'        , '--extras'),
-))
+setuptools_reqs = [
+    'setuptools',
+    'setuptools==27.3.0',
+    'setuptools==32.3.1',
+    'setuptools==36.3.0',
+]
+args_variants = ['', '--extras']
+
+
+@pytest.mark.parametrize(
+    'setuptools_req, test_args',
+    itertools.product(setuptools_reqs, args_variants),
+)
 def test_egg_fetcher(venv, setuptools_req, test_args):
     test_args = test_args.split()
     # Install pytest & pytest-runner.
