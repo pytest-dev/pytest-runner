@@ -35,15 +35,22 @@ params = dict(
 	],
 	extras_require={
 		'testing': [
+			# upstream
 			'pytest>=2.8',
 			'pytest-sugar>=0.9.1',
 			'collective.checkdocs',
+			'pytest-flake8',
+
+			# local
 			'pytest-virtualenv',
 		],
 		'docs': [
+			# upstream
 			'sphinx',
 			'jaraco.packaging>=3.2',
 			'rst.linker>=1.9',
+
+			# local
 		],
 	},
 	setup_requires=[
