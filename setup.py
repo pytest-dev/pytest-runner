@@ -32,6 +32,7 @@ params = dict(
 	py_modules=['ptr'],
 	python_requires='>=2.7,!=3.0,!=3.1',
 	install_requires=[
+		'setuptools>=27.3',
 	],
 	extras_require={
 		'testing': [

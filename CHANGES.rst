@@ -1,3 +1,8 @@
+4.1
+===
+
+* #40: Declare dependency on Setuptools in package metadata.
+
 4.0
 ===
 
