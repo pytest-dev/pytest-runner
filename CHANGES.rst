@@ -1,3 +1,9 @@
+4.2
+===
+
+* #40: Remove declared dependency and instead assert it at
+  run time.
+
 4.1
 ===
 

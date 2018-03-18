@@ -93,6 +93,18 @@ class PyTest(orig.test):
 		self.index_url = None
 		self.allow_hosts = None
 		self.addopts = []
+		self.ensure_setuptools_version()
+
+	@staticmethod
+	def ensure_setuptools_version():
+		"""
+		Due to the fact that pytest-runner is often required (via
+		setup-requires directive) by toolchains that never invoke
+		it (i.e. they're only installing the package, not testing it),
+		instead of declaring the dependency in the package
+		metadata, assert the requirement at run time.
+		"""
+		pkg_resources.require('setuptools>=27.3')
 
 	def finalize_options(self):
 		if self.addopts:
