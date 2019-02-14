@@ -1,3 +1,8 @@
+4.3
+===
+
+* #42: Update project metadata, including pyproject.toml declaration.
+
 4.2
 ===
 
