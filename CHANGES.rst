@@ -1,3 +1,10 @@
+4.4
+===
+
+* #43: Detect condition where declarative config will cause
+  errors and emit a UserWarning with guidance on necessary
+  actions.
+
 4.3.1
 =====
 
