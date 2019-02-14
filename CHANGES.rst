@@ -1,3 +1,14 @@
+4.3.1
+=====
+
+* #43: Re-release of 4.2 to supersede the 4.3 release which
+  proved to be backward-incompatible in that it requires
+  setuptools 30.4 or possibly later (to install). In the future, a
+  backward-incompatible release will re-release these changes.
+  For projects including pytest-runner, particularly as
+  ``setup_requires``, if support for older setuptools is required,
+  please pin to ``pytest-runner < 5``.
+
 4.2
 ===
 
