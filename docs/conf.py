@@ -1,19 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-extensions = [
-    'sphinx.ext.autodoc',
-    'jaraco.packaging.sphinx',
-    'rst.linker',
-]
+extensions = ['sphinx.ext.autodoc', 'jaraco.packaging.sphinx', 'rst.linker']
 
 master_doc = "index"
 
 link_files = {
     '../CHANGES.rst': dict(
-        using=dict(
-            GH='https://github.com',
-        ),
+        using=dict(GH='https://github.com'),
         replace=[
             dict(
                 pattern=r'(Issue #|\B#)(?P<issue>\d+)',
@@ -29,9 +23,8 @@ link_files = {
             ),
             dict(
                 pattern=r'Setuptools #(?P<setuptools_issue>\d+)',
-                url='https://github.com/pypa/setuptools'
-                '/issues/{setuptools_issue}/',
+                url='https://github.com/pypa/setuptools' '/issues/{setuptools_issue}/',
             ),
         ],
-    ),
+    )
 }
