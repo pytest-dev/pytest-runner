@@ -1,3 +1,8 @@
+5.0
+===
+
+* Packaging refresh, released again.
+
 4.5.1
 =====
 
@@ -6,6 +11,8 @@
 
 4.5
 ===
+
+(Pulled from PyPI due to #43 and #48)
 
 * Packaging (skeleton) refresh, including adoption of
   `black <https://pypi.org/project/black>`_ for style.
