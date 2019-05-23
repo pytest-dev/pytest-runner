@@ -1,3 +1,9 @@
+4.5.1
+=====
+
+* #48: Revert changes from 4.5 - restoring project to the
+  state at 4.4.
+
 4.5
 ===
 
