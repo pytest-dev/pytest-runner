@@ -1,3 +1,9 @@
+4.5
+===
+
+* Packaging (skeleton) refresh, including adoption of
+  `black <https://pypi.org/project/black>`_ for style.
+
 4.4
 ===
 
