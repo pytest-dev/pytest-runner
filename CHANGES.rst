@@ -1,7 +1,19 @@
 5.0
 ===
 
-* Packaging refresh, released again.
+* #42: Prefer pyproject.toml
+* Refresh package metadata.
+* This release now intentionally introduces the changes
+  unintionally brought about in 4.5 and 4.3, where the
+  adoption of declarative config adds a new requirement
+  on setuptools 30.4 or later. On systems running older
+  setuptools, installation of pytest-runner via
+  ``easy_install`` (or ``setup_requires``), will result
+  in a ``DistributionNotFound`` exception.
+
+  All projects should pin to ``pytest-runner < 5``
+  or upgrade the environment to ``setuptools >= 30.4``
+  (prior to invoking setup.py).
 
 4.5.1
 =====
