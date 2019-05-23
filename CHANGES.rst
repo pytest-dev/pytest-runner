@@ -1,3 +1,8 @@
+5.1
+===
+
+* #49: Surgically restore support for older setuptools versions.
+
 5.0
 ===
 
