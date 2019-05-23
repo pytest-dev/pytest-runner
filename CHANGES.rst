@@ -1,3 +1,9 @@
+4.5
+===
+
+* Packaging (skeleton) refresh, including adoption of
+  `black <https://pypi.org/project/black>`_ for style.
+
 4.4
 ===
 
@@ -15,6 +21,13 @@
   For projects including pytest-runner, particularly as
   ``setup_requires``, if support for older setuptools is required,
   please pin to ``pytest-runner < 5``.
+
+4.3
+===
+
+(Pulled from PyPI due to #43)
+
+* #42: Update project metadata, including pyproject.toml declaration.
 
 4.2
 ===
