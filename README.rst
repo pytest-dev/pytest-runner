@@ -6,6 +6,10 @@
 .. image:: https://img.shields.io/travis/pytest-dev/pytest-runner/master.svg
    :target: https://travis-ci.org/pytest-dev/pytest-runner
 
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+   :target: https://github.com/ambv/black
+   :alt: Code style: Black
+
 .. .. image:: https://img.shields.io/appveyor/ci/pytest-dev/pytest-runner/master.svg
 ..    :target: https://ci.appveyor.com/project/pytest-dev/pytest-runner/branch/master
 
