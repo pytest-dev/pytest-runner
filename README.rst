@@ -22,7 +22,7 @@ runner.
 Deprecation Notice
 ==================
 
-pytest-runner depends on deprecated features of setuptools and relys on features that break security
+pytest-runner depends on deprecated features of setuptools and relies on features that break security
 mechanisms in pip. For example `setup_requires` and `tests_require` bypass `pip --require-hashes`.
 See also https://github.com/pypa/setuptools/issues/1684.
 
