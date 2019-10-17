@@ -30,9 +30,7 @@ It is recommended that you:
 
 - Remove 'pytest-runner' from your 'setup_requires', preferably removing the `setup_requires` option.
 - Remove 'pytest' and any other testing requirements from 'tests_require', preferably removing the `setup_requires` option.
-- Use a requirement-test.txt file to hold test dependencies
-- Invoke tests with ``pip install --require-hashes requirements-test.txt && pytest``
-- Another good option is to configure a ``tox.ini`` next to your ``setup.cfg`` https://tox.readthedocs.io/en/latest/
+- Select a tool to bootstrap and then run tests such as tox
 
 Usage
 =====
