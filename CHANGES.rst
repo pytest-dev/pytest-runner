@@ -1,3 +1,8 @@
+5.2
+===
+
+* #50: This project is deprecated.
+
 5.1
 ===
 
