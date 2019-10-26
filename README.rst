@@ -19,6 +19,19 @@
 Setup scripts can use pytest-runner to add setup.py test support for pytest
 runner.
 
+Deprecation Notice
+==================
+
+pytest-runner depends on deprecated features of setuptools and relies on features that break security
+mechanisms in pip. For example 'setup_requires' and 'tests_require' bypass ``pip --require-hashes``.
+See also https://github.com/pypa/setuptools/issues/1684.
+
+It is recommended that you:
+
+- Remove 'pytest-runner' from your 'setup_requires', preferably removing the `setup_requires` option.
+- Remove 'pytest' and any other testing requirements from 'tests_require', preferably removing the `setup_requires` option.
+- Select a tool to bootstrap and then run tests such as tox
+
 Usage
 =====
 
