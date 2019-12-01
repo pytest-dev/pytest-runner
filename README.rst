@@ -16,6 +16,9 @@
 .. .. image:: https://readthedocs.org/projects/pytest-runner/badge/?version=latest
 ..    :target: https://pytest-runner.readthedocs.io/en/latest/?badge=latest
 
+.. image:: https://tidelift.com/badges/package/pypi/pytest-runner
+   :target: https://tidelift.com/subscription/pkg/pypi-pytest-runner?utm_source=pypi-pytest-runner&utm_medium=readme
+
 Setup scripts can use pytest-runner to add setup.py test support for pytest
 runner.
 
@@ -129,3 +132,10 @@ is invoked::
             #... (other setup requirements)
         ] + pytest_runner,
     )
+
+Security Contact
+================
+
+To report a security vulnerability, please use the
+`Tidelift security contact <https://tidelift.com/security>`_.
+Tidelift will coordinate the fix and disclosure.
