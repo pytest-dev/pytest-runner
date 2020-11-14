@@ -38,8 +38,10 @@ class CustomizedDist(Distribution):
     index_url = None
 
     def fetch_build_egg(self, req):
-        """ Specialized version of Distribution.fetch_build_egg
-        that respects respects allow_hosts and index_url. """
+        """
+        Specialized version of Distribution.fetch_build_egg
+        that respects respects allow_hosts and index_url.
+        """
         from setuptools.command.easy_install import easy_install
 
         dist = Distribution({'script_args': ['easy_install']})
