@@ -48,6 +48,7 @@ setuptools_reqs = (
 args_variants = ['', '--extras']
 
 
+@pytest.mark.xfail('platform.system() == "Windows"')
 @pytest.mark.parametrize(
     'setuptools_req, test_args', itertools.product(setuptools_reqs, args_variants)
 )
