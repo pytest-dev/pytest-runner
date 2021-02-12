@@ -81,8 +81,8 @@ Standalone Example
 ==================
 
 This technique is deprecated - if you have standalone scripts
-you wish to invoke with dependencies, `use rwt
-<https://pypi.org/project/rwt>`_.
+you wish to invoke with dependencies, `use pip-run
+<https://pypi.org/project/pip-run>`_.
 
 Although ``pytest-runner`` is typically used to add pytest test
 runner support to maintained packages, ``pytest-runner`` may
