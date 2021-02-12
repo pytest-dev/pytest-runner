@@ -32,8 +32,8 @@ See also https://github.com/pypa/setuptools/issues/1684.
 
 It is recommended that you:
 
-- Remove 'pytest-runner' from your 'setup_requires', preferably removing the `setup_requires` option.
-- Remove 'pytest' and any other testing requirements from 'tests_require', preferably removing the `setup_requires` option.
+- Remove ``'pytest-runner'`` from your ``setup_requires``, preferably removing the ``setup_requires`` option.
+- Remove ``'pytest'`` and any other testing requirements from ``tests_require``, preferably removing the ``tests_requires`` option.
 - Select a tool to bootstrap and then run tests such as tox
 
 Usage
