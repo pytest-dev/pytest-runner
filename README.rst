@@ -1,20 +1,21 @@
 .. image:: https://img.shields.io/pypi/v/pytest-runner.svg
-   :target: https://pypi.org/project/pytest-runner
+   :target: `PyPI link`_
 
 .. image:: https://img.shields.io/pypi/pyversions/pytest-runner.svg
+   :target: `PyPI link`_
 
-.. image:: https://img.shields.io/travis/pytest-dev/pytest-runner/master.svg
-   :target: https://travis-ci.org/pytest-dev/pytest-runner
+.. _PyPI link: https://pypi.org/project/pytest-runner
+
+.. image:: https://github.com/jaraco/pytest-runner/workflows/Automated%20Tests/badge.svg
+   :target: https://github.com/jaraco/pytest-runner/actions?query=workflow%3A%22Automated+Tests%22
+   :alt: Automated Tests
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-   :target: https://github.com/ambv/black
+   :target: https://github.com/psf/black
    :alt: Code style: Black
 
-.. .. image:: https://img.shields.io/appveyor/ci/pytest-dev/pytest-runner/master.svg
-..    :target: https://ci.appveyor.com/project/pytest-dev/pytest-runner/branch/master
-
-.. .. image:: https://readthedocs.org/projects/pytest-runner/badge/?version=latest
-..    :target: https://pytest-runner.readthedocs.io/en/latest/?badge=latest
+.. .. image:: https://readthedocs.org/projects/skeleton/badge/?version=latest
+..    :target: https://skeleton.readthedocs.io/en/latest/?badge=latest
 
 .. image:: https://tidelift.com/badges/package/pypi/pytest-runner
    :target: https://tidelift.com/subscription/pkg/pypi-pytest-runner?utm_source=pypi-pytest-runner&utm_medium=readme

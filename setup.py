@@ -18,4 +18,4 @@ added, supply the basic metadata here. Ref #49.
 """
 
 if __name__ == "__main__":
-    setuptools.setup(use_scm_version=True, **compat)
+    setuptools.setup(**compat)
