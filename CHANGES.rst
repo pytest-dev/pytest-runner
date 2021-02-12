@@ -1,3 +1,9 @@
+v5.3.0
+======
+
+* Require Python 3.6 or later.
+* Refreshed package metadata.
+
 5.2
 ===
 
