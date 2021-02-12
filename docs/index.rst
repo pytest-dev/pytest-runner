@@ -1,5 +1,5 @@
-Welcome to pytest-runner documentation!
-=======================================
+Welcome to |project| documentation!
+===================================
 
 .. toctree::
    :maxdepth: 1
