@@ -1,3 +1,8 @@
+v5.3.2
+======
+
+* #58: Fixed syntax issue in changelog.
+
 v5.3.1
 ======
 
@@ -96,8 +101,7 @@ v5.3.0
 
 * #38: Fixed AttributeError when running with ``--dry-run``.
   ``PyTest.run()`` no longer stores nor returns the result code.
-  Based on the commit message for `840ff4c <
-  https://github.com/pytest-dev/pytest-runner/commit/840ff4c2bf6c752d9770f0dd8d64a841060cf9bc>`_,
+  Based on the commit message for `840ff4c <https://github.com/pytest-dev/pytest-runner/commit/840ff4c2bf6c752d9770f0dd8d64a841060cf9bc>`_,
   nothing has ever relied on that value.
 
 3.0
