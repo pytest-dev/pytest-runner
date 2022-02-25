@@ -44,6 +44,8 @@ setuptools_reqs = (
     ['setuptools', 'setuptools==27.3.0', 'setuptools==32.3.1', 'setuptools==36.3.0']
     if sys.version_info < (3, 7)
     else ['setuptools', 'setuptools==38.4.1']
+    if sys.version_info < (3, 10)
+    else ['setuptools', 'setuptools==49.0.0']
 )
 args_variants = ['', '--extras']
 
