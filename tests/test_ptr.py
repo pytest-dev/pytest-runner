@@ -55,8 +55,7 @@ args_variants = ['', '--extras']
 def test_egg_fetcher(venv, setuptools_req, test_args):
     test_args = test_args.split()
     # Install pytest & pytest-runner.
-    venv.run('python setup.py develop', cwd=os.getcwd())
-    venv.run('pip install pytest')
+    venv.run('pip install pytest .', cwd=os.getcwd())
     # Install setuptools version.
     venv.run('pip install -U'.split() + [setuptools_req])
     # For debugging purposes.
