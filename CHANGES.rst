@@ -1,3 +1,9 @@
+v6.0.0
+======
+
+* #49: Dropped workaround for older setuptools versions.
+* Require Python 3.7.
+
 v5.3.2
 ======
 
