@@ -10,12 +10,6 @@ import operator as _operator
 import itertools as _itertools
 import warnings as _warnings
 
-try:
-    # ensure that map has the same meaning on Python 2
-    from future_builtins import map
-except ImportError:
-    pass
-
 import pkg_resources
 import setuptools.command.test as orig
 from setuptools import Distribution
