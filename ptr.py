@@ -90,7 +90,7 @@ class PyTest(orig.test):
         (
             'index-url=',
             None,
-            "Specify an index url from which to retrieve " "dependencies",
+            "Specify an index url from which to retrieve dependencies",
         ),
         (
             'allow-hosts=',
@@ -101,7 +101,7 @@ class PyTest(orig.test):
         (
             'addopts=',
             None,
-            "Additional options to be passed verbatim to the " "pytest runner",
+            "Additional options to be passed verbatim to the pytest runner",
         ),
     ]
 
@@ -190,7 +190,7 @@ class PyTest(orig.test):
         for attr in 'allow_hosts index_url'.split():
             setattr(dist, attr, getattr(self, attr))
         for attr in (
-            'dependency_links install_requires ' 'tests_require extras_require '
+            'dependency_links install_requires tests_require extras_require '
         ).split():
             setattr(dist, attr, getattr(self.distribution, attr))
         installed_dists = self.install_dists(dist)
