@@ -1,3 +1,8 @@
+v6.0.1
+======
+
+* Updated Trove classifier to indicate this project is inactive.
+
 v6.0.0
 ======
 
